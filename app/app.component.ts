@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { AllAccountsComponent }  from './all-accounts.component';
+import { APIService } from './api.service';
 
 
 
@@ -11,6 +12,7 @@ import { AllAccountsComponent }  from './all-accounts.component';
   directives: [ROUTER_DIRECTIVES],
   providers: [
     ROUTER_PROVIDERS,
+    APIService
   ]
 })
 @RouteConfig([
@@ -19,11 +21,22 @@ import { AllAccountsComponent }  from './all-accounts.component';
 ])
 export class AppComponent {
     data: Object = { };
+    title:string = 'Dromedar';
+    apples:number = 4;
+
+    constructor( private API: APIService ) { }
 
     formSubmit() {
         sessionStorage.setItem('apiUrl', 'http://crmweb.cintutv.se/CWP2');
         var username = this.data.username,
             password = this.data.password;
+    }
 
+    oliver() {
+        this.API
+            .login('utb', '123')
+            .done(function(res) {
+                console.log(res);
+            });
     }
 }
