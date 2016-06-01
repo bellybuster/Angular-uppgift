@@ -9,15 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var api_service_1 = require('./api.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(API) {
+        this.API = API;
+        this.title = 'Dromedar';
+        this.apples = 4;
     }
+    AppComponent.prototype.oliver = function () {
+        this.API
+            .login('utb', '123')
+            .done(function (res) {
+            console.log(res);
+        });
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: './app/app.component.html'
+            templateUrl: './app/app.component.html',
+            providers: [api_service_1.APIService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [api_service_1.APIService])
     ], AppComponent);
     return AppComponent;
 }());
