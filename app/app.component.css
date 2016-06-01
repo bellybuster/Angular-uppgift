@@ -1,0 +1,15 @@
+h1 {
+  font-size: 40px;
+  color: #999;
+  margin-bottom: 0;
+}
+h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+input {
+    font-size: 14px;
+    height: 30px;
+    margin: 5px;
+}
