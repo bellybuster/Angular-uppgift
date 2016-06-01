@@ -11,13 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var all_accounts_component_1 = require('./all-accounts.component');
+var api_service_1 = require('./api.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(API) {
+        this.API = API;
         this.data = {};
+        this.title = 'Dromedar';
+        this.apples = 4;
     }
     AppComponent.prototype.formSubmit = function () {
         sessionStorage.setItem('apiUrl', 'http://crmweb.cintutv.se/CWP2');
         var username = this.data.username, password = this.data.password;
+    };
+    AppComponent.prototype.oliver = function () {
+        this.API
+            .login('utb', '123')
+            .done(function (res) {
+            console.log(res);
+        });
     };
     AppComponent = __decorate([
         core_1.Component({
@@ -27,13 +38,14 @@ var AppComponent = (function () {
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],
             providers: [
                 router_deprecated_1.ROUTER_PROVIDERS,
+                api_service_1.APIService
             ]
         }),
         router_deprecated_1.RouteConfig([
             { path: '/', name: 'Home', component: AppComponent, useAsDefault: true },
             { path: '/AllAccounts', name: 'All Accounts', component: all_accounts_component_1.AllAccountsComponent }
         ]), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [api_service_1.APIService])
     ], AppComponent);
     return AppComponent;
 }());
